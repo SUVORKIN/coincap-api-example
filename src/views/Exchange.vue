@@ -3,7 +3,7 @@
     <v-layout v-if="markets" column justify-center>
       <MarketsTable :markets="markets" />
       <v-flex class="mt-3" text-xs-center>
-        <v-btn @click="fetchExchange()" round color="success">Load more</v-btn>
+        <v-btn :disabled="!markets.length" @click="fetchExchange()" round color="success">Load more</v-btn>
       </v-flex>
     </v-layout>
   </div>

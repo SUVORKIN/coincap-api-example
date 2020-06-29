@@ -19,12 +19,15 @@ export default {
   methods: {
     // example of async fetch function
     async fetchCandles () {
-      const url = `https://api.coincap.io/v2/candles?exchange=${this.$route.query.exchangeId}&interval=h8&baseId=${this.$route.query.baseId}&quoteId=${this.$route.query.quoteId}`
+      const url = `https://api.coincap.io/v2/candles?exchange=${this.$route.query.exchangeId || 'binance'}&interval=h8&baseId=${this.$route.query.baseId || 'bitcoin'}&quoteId=${this.$route.query.quoteId || 'tether'}`
       let response = await fetch(url, {
         method: 'GET'
       })
       if (response.ok) {
-        // let json = await response.json()
+        let json = await response.json()
+        if (!json.data.length) {
+          this.$store.dispatch('message', 'No Data')
+        }
       } else {
         this.$store.dispatch('message', response.status)
       }

@@ -28,6 +28,11 @@ export default new Router({
       path: '/chart',
       name: 'chart',
       component: () => import('./views/Chart.vue')
+    },
+    {
+      path: '*',
+      name: 'not-found',
+      component: () => import('./views/NotFound.vue')
     }
   ]
 })
